@@ -1,0 +1,4 @@
+torch
+torchvision>=0.9
+numpy
+transformers
