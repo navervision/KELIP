@@ -1,13 +1,35 @@
 # KELIP
 
-## USAGE
-We provide an easy-to-use KELIP API 
+Official PyTorch implementation of *"Large-scale Bilingual Language-Image Contrastive Learning"* ([ICLRW 2022](https://meta.wikimedia.org/wiki/Wiki-M3L))
+
+**Byungsoo Ko\*, Geonmo Gu\***
+(* Authors contributed equally.)
+
+@NAVER/LINE Vision
+
+Paper | Colab | [Gradio Demo](https://huggingface.co/spaces/navervision/KELIP)
+
+## Overview
+KELIP is a Korean and English bilingual Contrastive Language-Image Pre-training model. Motivated by OpenAI's [CLIP](https://github.com/openai/CLIP), we trained a bilingual multimodal model with collected 1.1 billion image-text pairs (708 million Korean and 476 million English), which is three times larger than CLIP's dataset. KELIP shows competitive performance in zero-shot classification and cross-modal retrieval tasks for both languages. We found KELIP contains each language's cultural semantics and cross-lingual relation.
+
+#### Zero-shot Classification
+![classification](.github/classification.png)
+
+#### Zero-shot Cross-modal Retrieval
+![retrieval](.github/retrieval.png)
+
+## Usage
+We provide an easy-to-use KELIP API.
+
 ```
 $ pip install git+https://github.com/navervision/KELIP.git
 ```
 
+### Example
+
 ```python
 import kelip
+import torch
 from PIL import Image
 from urllib.request import urlretrieve
 
@@ -17,9 +39,9 @@ model, preprocess_img, tokenizer = kelip.build_model('ViT-B/32')
 model = model.to(device)
 model.eval()
 
-urlretrieve('https://upload.wikimedia.org/wikipedia/commons/1/1d/Lotte_World_Groupe_F_Seoul.jpg', 'test.jpg')
-image = preprocess_img(Image.open('test.jpg')).unsqueeze(0).to(device)
-text = tokenizer.encode(['불꽃놀이', '야경', '롯데타워', '석촌호수']).to(device)
+urlretrieve('https://upload.wikimedia.org/wikipedia/commons/7/77/Sarabi-dog.jpg', 'dog.jpg')
+image = preprocess_img(Image.open('dog.jpg')).unsqueeze(0).to(device)
+text = tokenizer.encode(['a dog', 'a cat', 'a tiger', 'a rabbit']).to(device)
 with torch.no_grad():
 	image_features = model.encode_image(image, l2norm=True)
 	text_features = model.encode_text(text, l2norm=True)
