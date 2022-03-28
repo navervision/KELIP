@@ -25,6 +25,32 @@ We provide an easy-to-use KELIP API.
 $ pip install git+https://github.com/navervision/KELIP.git
 ```
 
+### API
+
+#### `kelip.build_model(model_name=...)`
+Returns the pretrained model, TorchVision image transform, and tokenizer, specified by the model name. The pretrained model will be downloaded if necessary. Currently, we support only 'ViT-B/32' model.
+
+```
+model, preprocess_img, tokenizer = kelip.build_model('ViT-B/32')
+```
+
+The returns of `kelip.build_model()` supports the following methods:
+
+#### `preprocess_img(img: PIL)`
+Return a Tensor containing preprocessed input image. This can be used as the input to the visual encoder.
+
+#### `tokenizer.encode(texts: str or List[str], context_length=77)`
+Given a string or a list of strings as input, returns a Tensor, containing tokenized sequences of the input texts. This can be used as the input to the text encoder.
+
+#### `model.encode_image(image: Tensor, l2norm: bool)`
+Given a batch of images, returns the image features encoded by the vision encoder of the KELIP model. The feature can be L2 normalized by `l2norm=True`.
+
+#### `model.encode_text(text: Tensor, l2norm: bool)`
+Given a batch of text tokens, returns the text features encoded by the text encoder of the KELIP model. The feature can be L2 normalized by `l2norm=True`.
+
+#### `model(image: Tensor, text: Tensor)`
+Given a batch of images and text tokens, returns logit scores of image and text input, which are cosine similarities between the corresponding image and text features, times `logit_scale.exp()`.
+
 ### Example
 
 ```python
@@ -43,11 +69,11 @@ urlretrieve('https://upload.wikimedia.org/wikipedia/commons/7/77/Sarabi-dog.jpg'
 image = preprocess_img(Image.open('dog.jpg')).unsqueeze(0).to(device)
 text = tokenizer.encode(['a dog', 'a cat', 'a tiger', 'a rabbit']).to(device)
 with torch.no_grad():
-	image_features = model.encode_image(image, l2norm=True)
-	text_features = model.encode_text(text, l2norm=True)
+    image_features = model.encode_image(image, l2norm=True)
+    text_features = model.encode_text(text, l2norm=True)
 
-	logits_per_image, logits_per_text = model(image, text)
-	probs = logits_per_image.softmax(dim=-1)
+    logits_per_image, logits_per_text = model(image, text)
+    probs = logits_per_image.softmax(dim=-1)
 
 print("Label probs:", probs)
 ```
