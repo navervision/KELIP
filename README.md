@@ -7,7 +7,7 @@ Official PyTorch implementation of *"Large-scale Bilingual Language-Image Contra
 
 @NAVER/LINE Vision
 
-[Paper](https://arxiv.org/abs/2203.14463) | Colab | [Gradio Demo](https://huggingface.co/spaces/navervision/KELIP)
+[[`Paper`](https://arxiv.org/abs/2203.14463)] [[`Colab`](https://colab.research.google.com/github/navervision/KELIP/blob/master/notebooks/Interacting_with_KELIP.ipynb)] [[`Gradio Demo`](https://huggingface.co/spaces/navervision/KELIP)] [[`BibTex`](https://github.com/navervision/KELIP#citing-kelip)]
 
 ## Overview
 KELIP is a Korean and English bilingual Contrastive Language-Image Pre-training model. Motivated by OpenAI's [CLIP](https://github.com/openai/CLIP), we trained a bilingual multimodal model with collected 1.1 billion image-text pairs (708 million Korean and 476 million English), which is three times larger than CLIP's dataset. KELIP shows competitive performance in zero-shot classification and cross-modal retrieval tasks for both languages. We found KELIP contains each language's cultural semantics and cross-lingual relation.
@@ -86,6 +86,9 @@ $ pip install gradio
 $ python demo/demo_zeroshot.py
 ```
 
+## Acknowledgement
+This repository is built based on the OpenAI's [CLIP](https://github.com/openai/CLIP) repository.
+
 ## License
 ```
 KELIP
@@ -102,4 +105,16 @@ distributed under the License is distributed on an "AS IS" BASIS,
 WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
+```
+
+## Citing KELIP
+If you find this repository useful, please consider giving a start :star: and citation:
+
+```
+@article{ko2022largescale,
+      title={Large-scale Bilingual Language-Image Contrastive Learning}, 
+      author={Byungsoo Ko and Geonmo Gu},
+      journal={arXiv preprint arXiv:2203.14463},
+      year={2022}
+}
 ```
