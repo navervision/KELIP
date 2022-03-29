@@ -51,13 +51,12 @@ def classify(img, user_text):
     values, indices = similarity[0].topk(len(user_texts))
     result = {}
     for value, index in zip(values, indices):
-        result[user_texts[index]] = f"{value.item()*100:.2f}%"
+        result[user_texts[index]] = value.item()
+    print(result)
 
     return result
 
 if __name__ == '__main__':
-    print('\tLoading models')
-
     global model_dict
 
     model_dict = load_model()
@@ -67,38 +66,18 @@ if __name__ == '__main__':
               gr.inputs.Textbox(lines=5, label="Caption"),
               ]
 
-    outputs = gr.outputs.KeyValues()
+    outputs = ['label']
 
-    title = "Zeroshot classification demo"
-
-    if torch.cuda.is_available():
-        demo_status = "Demo is running on GPU"
-    else:
-        demo_status = "Demo is running on CPU"
-    description = f"Details: paper_url. {demo_status}"
+    title = "KELIP"
+    description = "Zero-shot classification with KELIP -- Korean and English bilingual contrastive Language-Image Pre-training model that is trained with collected 1.1 billion image-text pairs (708 million Korean and 476 million English).<br> <br><a href='https://arxiv.org/abs/2203.14463' target='_blank'>Arxiv</a> | <a href='https://github.com/navervision/KELIP' target='_blank'>Github</a>"
     examples = [
-    ["demo/images/jkh.png", "장기하,아이유,조인성,마동석"],
-    ["demo/images/jkh.png", "눈감았음,눈떴음"],
     ["demo/images/squid_sundae.jpg", "오징어 순대,김밥,순대,떡볶이"],
-    ["demo/images/poysian.jpg", "립스틱,분필,야돔"],
-    ["demo/images/world_peace_gate.jpg", "평화의문,올림픽공원,롯데월드,석촌호수"],
     ["demo/images/seokchon_lake.jpg", "평화의문,올림픽공원,롯데월드,석촌호수"],
-    ["demo/images/hwangchil_tree.jpg", "황칠 나무 묘목,황칠 나무,난,소나무 묘목,야자수"],
-    ["demo/images/areca_palm.jpg", "아레카야자,난초,난,식물,장미,야자수,황칠나무"],
-    ["demo/images/world_peace_gate.jpg", "봄,여름,가을,겨울"],
-    ["demo/images/seokchon_lake.jpg", "봄,여름,가을,겨울"],
-    ["demo/images/spring.jpg", "봄,여름,가을,겨울"],
-    ["demo/images/summer1.jpg", "봄,여름,가을,겨울"],
-    ["demo/images/summer2.jpeg", "봄,여름,가을,겨울"],
-    ["demo/images/autumn1.JPG", "봄,여름,가을,겨울"],
-    ["demo/images/autumn2.jpg", "봄,여름,가을,겨울"],
-    ["demo/images/winter1.jpg", "봄,여름,가을,겨울"],
-    ["demo/images/winter2.jpg", "봄,여름,가을,겨울"],
-    ["demo/images/airplane.png", "a photo of a airplane.,a photo of a bear.,a photo of a bird.,a photo of a giraffe.,a photo of a car."],
-    ["demo/images/airplane.png", "비행기 사진.,곰 사진.,새 사진.,기린 사진.,자동차 사진."],
-    ["demo/images/volleyball.png", "a photo of a person volleyball spiking.,a photo of a person jump rope.,a photo of a person soccer penalty.,a photo of a person long jump.,a photo of a person table tennis shot."],
-    ["demo/images/volleyball.png", "배구 스파이크하는 사람의 사진.,줄넘기하는 사람의 사진.,축구 페널티하는 사람의 사진.,멀리뛰기하는 사람의 사진.,탁구 치는 사람의 사진."],
+    ["demo/images/seokchon_lake.jpg", "spring,summer,autumn,winter"],
+    ["demo/images/dog.jpg", "a dog,a cat,a tiger,a rabbit"],
     ]
+
+    article = ""
 
     gr.Interface(classify,
                  inputs,
@@ -106,9 +85,5 @@ if __name__ == '__main__':
                  title=title,
                  description=description,
                  examples=examples,
-                 examples_per_page=50,
-                 server_name="0.0.0.0",
-                 server_port=10000
-                 ).launch()
-
-
+                 article=article
+                 ).launch(server_name="0.0.0.0",server_port=10000)

@@ -79,12 +79,18 @@ print("Label probs:", probs)
 ```
 
 ## Demo
-<img src=".github/demo.PNG" height="300">
+You can play with KELIP zero-shot classification in Huggingface [Gradio demo](https://huggingface.co/spaces/navervision/KELIP), or you can build a custom demo on your server.
 
 ```
+# Install Gradio package
 $ pip install gradio
+
+# Run Gradio demo page
 $ python demo/demo_zeroshot.py
 ```
+
+![demo_kor](.github/demo_kor.png)
+![demo_en](.github/demo_en.png)
 
 ## Acknowledgement
 This repository is built based on the OpenAI's [CLIP](https://github.com/openai/CLIP) repository.
