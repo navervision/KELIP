@@ -7,7 +7,7 @@ Official PyTorch implementation of *"Large-scale Bilingual Language-Image Contra
 
 @NAVER/LINE Vision
 
-Paper | Colab | [Gradio Demo](https://huggingface.co/spaces/navervision/KELIP)
+[Paper](https://arxiv.org/abs/2203.14463) | Colab | [Gradio Demo](https://huggingface.co/spaces/navervision/KELIP)
 
 ## Overview
 KELIP is a Korean and English bilingual Contrastive Language-Image Pre-training model. Motivated by OpenAI's [CLIP](https://github.com/openai/CLIP), we trained a bilingual multimodal model with collected 1.1 billion image-text pairs (708 million Korean and 476 million English), which is three times larger than CLIP's dataset. KELIP shows competitive performance in zero-shot classification and cross-modal retrieval tasks for both languages. We found KELIP contains each language's cultural semantics and cross-lingual relation.
