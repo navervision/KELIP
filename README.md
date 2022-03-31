@@ -7,7 +7,7 @@ Official PyTorch implementation of *"Large-scale Bilingual Language-Image Contra
 
 @NAVER/LINE Vision
 
-[[`Paper`](https://arxiv.org/abs/2203.14463)] [[`Colab`](https://colab.research.google.com/github/navervision/KELIP/blob/master/notebooks/Interacting_with_KELIP.ipynb)] [[`Gradio Demo`](https://huggingface.co/spaces/navervision/KELIP)] [[`BibTex`](https://github.com/navervision/KELIP#citing-kelip)]
+[[`Paper`](https://arxiv.org/abs/2203.14463)] [[`Gradio Demo`](https://huggingface.co/spaces/navervision/KELIP)] [[`BibTex`](https://github.com/navervision/KELIP#citing-kelip)] [[`Colab (Interacting with KELIP)`](https://colab.research.google.com/github/navervision/KELIP/blob/master/notebooks/Interacting_with_KELIP.ipynb)] [[`Colab (KELIP guided diffusion)`](https://colab.research.google.com/github/navervision/KELIP/blob/master/notebooks/KELIP_guided_diffusion.ipynb)]
 
 ## Overview
 KELIP is a Korean and English bilingual Contrastive Language-Image Pre-training model. Motivated by OpenAI's [CLIP](https://github.com/openai/CLIP), we trained a bilingual multimodal model with collected 1.1 billion image-text pairs (708 million Korean and 476 million English), which is three times larger than CLIP's dataset. KELIP shows competitive performance in zero-shot classification and cross-modal retrieval tasks for both languages. We found KELIP contains each language's cultural semantics and cross-lingual relation.
@@ -91,6 +91,11 @@ $ python demo/demo_zeroshot.py
 
 ![demo_kor](.github/demo_kor.png)
 ![demo_en](.github/demo_en.png)
+
+## KELIP guided diffusion
+We can generate images from Korean or English text prompts with KELIP guided diffusion. It uses OpenAI's 256x256 unconditional ImageNet [diffusion model](https://github.com/openai/guided-diffusion) together with KELIP to connect text prompts with images. Try out in [Colab (KELIP guided diffusion)](https://colab.research.google.com/github/navervision/KELIP/blob/master/notebooks/KELIP_guided_diffusion.ipynb).
+
+<img src = ".github/guided_diffusion.png" width="60%">
 
 ## Acknowledgement
 This repository is built based on the OpenAI's [CLIP](https://github.com/openai/CLIP) repository.
