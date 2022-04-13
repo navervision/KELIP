@@ -5,7 +5,7 @@ Official PyTorch implementation of *"Large-scale Bilingual Language-Image Contra
 **Byungsoo Ko\*, Geonmo Gu\***
 (* Authors contributed equally.)
 
-@NAVER/LINE Vision
+@NAVER Vision
 
 [[`Paper`](https://arxiv.org/abs/2203.14463)] [[`Gradio Demo`](https://huggingface.co/spaces/navervision/KELIP)] [[`BibTex`](https://github.com/navervision/KELIP#citing-kelip)] [[`Colab (Interacting with KELIP)`](https://colab.research.google.com/github/navervision/KELIP/blob/master/notebooks/Interacting_with_KELIP.ipynb)] [[`Colab (KELIP guided diffusion)`](https://colab.research.google.com/github/navervision/KELIP/blob/master/notebooks/KELIP_guided_diffusion.ipynb)]
 
